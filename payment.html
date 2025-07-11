@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Payment - Sud's Bites</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <img src="Images/ChatGPT Image Jul 11, 2025, 11_21_32 PM.png" alt="Sud's Bites Logo" class="logo" />
+    <nav>
+      <a href="index.html#home">Home</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#buy">Buy</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h1>Complete Your Order</h1>
+      <p>₦10,000 per pack</p>
+
+      <!-- Manual WhatsApp Option -->
+      <button onclick="window.location.href='https://wa.me/2349128245685?text=I%20want%20to%20order%20Sud%27s%20Bites'">
+        Chat to Pay
+      </button>
+
+      <!-- Paystack Button -->
+      <div style="margin-top: 20px;">
+        <button onclick="payWithPaystack()">Pay with Paystack</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sud's Bites</p>
+  </footer>
+
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <script>
+    function payWithPaystack() {
+      let handler = PaystackPop.setup({
+        key: 'pk_test_a7b4947b644756ae6668816d4ff7f14525cbd9f8',
+        email: 'sudaissabdulrasheed@email.com',
+        amount: 1000000, // ₦10,000 in kobo
+        currency: 'NGN',
+        ref: '' + Math.floor(Math.random() * 1000000000 + 1),
+        callback: function (response) {
+          alert('Payment complete! Reference: ' + response.reference);
+        },
+        onClose: function () {
+          alert('Transaction cancelled');
+        }
+      });
+      handler.openIframe();
+    }
+  </script>
+</body>
+</html>
